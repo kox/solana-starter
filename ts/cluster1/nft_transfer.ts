@@ -20,7 +20,7 @@ const mint = generateSigner(umi);
 
 (async () => {
     
-    const tx = await createNft(umi, {
+    /* const tx = await createNft(umi, {
         mint,
         name: 'WBA Turbin3 7th RUG Cohort',
         uri: 'https://arweave.net/yci6Q_VKDJ6y47uCH4xJ-up0YjzhlJviOxty_fwLAOo',
@@ -30,26 +30,27 @@ const mint = generateSigner(umi);
     console.log(tx);
     
     const asset = await fetchDigitalAsset(umi, mint.publicKey)
-    console.log(mint.publicKey);
+    console.log(mint.publicKey); */
 
-    /* const to = fromWeb3JsPublicKey(new PKWEB3('6eGKgDhFAaLYkxoDMyx2NU4RyrSKfCXdRmqtjT7zodxQ'))
+    const mint = fromWeb3JsPublicKey(new PKWEB3('5SZERf5ba1TWgxU6MXfWqjp4d3bhXyUMKgbGJXwVgEmW'))
+    const to = fromWeb3JsPublicKey(new PKWEB3('G5vPmrP8n5LQjoujbqRafiynEB9TrgkibrUGmDyhjGCs'))
 
-    await transferV1(umi, {
-        mint: mint.publicKey,
+    const tx = await transferV1(umi, {
+        mint: mint,
         authority: myKeypairSigner,
         tokenOwner: myKeypairSigner.publicKey,
         destinationOwner: to,
         tokenStandard: TokenStandard.NonFungible,
       }).sendAndConfirm(umi)
- */
-    
+
+    console.log(tx);
     // let tx = ???
     // let result = await tx.sendAndConfirm(umi);
     // const signature = base58.encode(result.signature);
     
     // console.log(`Succesfully Minted! Check out your TX here:\nhttps://explorer.solana.com/tx/${signature}?cluster=devnet`)
 
-    console.log("Mint Address: ", mint.publicKey);
+    console.log("Mint Address: ", mint);
 
-    console.log(asset);
+    /* console.log(asset); */
 })();

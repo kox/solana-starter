@@ -6,6 +6,7 @@ import { hasGetLogsMethod } from "../tools/hasGetLogsMethod";
 // Import our keypair from the wallet file
 const keypair = Keypair.fromSecretKey(new Uint8Array(wallet.secret_key));
 
+
 //Create a Solana devnet connection
 const commitment: Commitment = "confirmed";
 const connection = new Connection("https://api.devnet.solana.com", commitment);
@@ -13,7 +14,7 @@ const connection = new Connection("https://api.devnet.solana.com", commitment);
 const token_decimals = 1_000_000n;
 
 // Mint address
-const mint = new PublicKey("3YTkbRsuufDntQPhYMgmPVNbq4dVGiibZiAshDgXhX4E");
+const mint = new PublicKey("Cd1sP6ZjLp5yeyiCpe7avjv4U6r9e292cpcAsdonaLUM");
 
 (async () => {
     try {
@@ -24,8 +25,8 @@ const mint = new PublicKey("3YTkbRsuufDntQPhYMgmPVNbq4dVGiibZiAshDgXhX4E");
             mint,                // mint
             keypair.publicKey    // owner
         );                       // curve false by default
-        
-        console.log(`Your ata is: ${ ata.address.toBase58() }`);
+
+        console.log(`Your ata is: ${ata.address.toBase58()}`);
 
         // Mint tokens to ATA
         const mintTx = await mintTo(
@@ -34,18 +35,18 @@ const mint = new PublicKey("3YTkbRsuufDntQPhYMgmPVNbq4dVGiibZiAshDgXhX4E");
             mint,
             ata.address,
             keypair.publicKey,
-            1001n * token_decimals, 
+            1001n * token_decimals,
         )
 
         console.log(`Your mint txid: ${mintTx}`);
     } catch (error) {
-      console.log(`Oops, something went wrong: ${error}`);
+        console.log(`Oops, something went wrong: ${error}`);
 
-      // Check if the error has a getLogs method
-      if (hasGetLogsMethod(error)) {
-        const logs = await error.getLogs();
-        console.error("Transaction logs: ", logs);
-    }
+        // Check if the error has a getLogs method
+        if (hasGetLogsMethod(error)) {
+            const logs = await error.getLogs();
+            console.error("Transaction logs: ", logs);
+        }
     }
 })()
 
